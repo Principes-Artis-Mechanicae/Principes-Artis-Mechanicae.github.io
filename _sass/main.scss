@@ -11,3 +11,10 @@
 @import 'layout/archives';
 @import 'layout/categories';
 @import 'layout/category-tag';
+
+@font-face {
+  font-family: 'SpoqaHanSansNeo';
+  font-style: normal;
+  font-weight: 100;
+  src: url('/assets/fonts/SpoqaHanSansNeo-Regular.ttf') format('truetype');
+}
