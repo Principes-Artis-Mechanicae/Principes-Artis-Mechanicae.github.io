@@ -16,7 +16,7 @@ timezone: Asia/Seoul
 
 title: Principes # the main title
 
-tagline: IT 업계의 선구자가 되고 싶은 학생들의 이야기입니다. # it will display as the sub-title
+tagline: We are the Pioneers of Engineering # it will display as the sub-title
 
 description: >- # used by seo meta and the atom feed
   A minimal, responsive and feature-rich Jekyll theme for technical writing.
