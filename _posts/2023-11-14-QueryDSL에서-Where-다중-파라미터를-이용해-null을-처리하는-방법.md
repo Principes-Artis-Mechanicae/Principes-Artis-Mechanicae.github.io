@@ -13,17 +13,17 @@ GET-P 프로젝트를 진행하던 중, 프론트엔드에서 요청된 쿼리�
 ```java
 public List<Project> findFilteredProjects(ProjectStatus projectStatus,
             Long applicationDeadlineOffset) {
-        BooleanBuilder booleanBuilder = new BooleanBuilder();
-        if (projectStatus != null) {
-            booleanBuilder.and(project.status.eq(projectStatus));
-        }
-        if (applicationDeadlineOffset != null) {
-            LocalDate applicationDeadline = LocalDate.now().plusDays(applicationDeadlineOffset);
-            booleanBuilder.and(project.applicationDeadline.loe(applicationDeadline));
-        }
-        JPAQuery<Project> query = queryFactory.selectFrom(project).where(booleanBuilder);
-        return query.fetch();
+    BooleanBuilder booleanBuilder = new BooleanBuilder();
+    if (projectStatus != null) {
+        booleanBuilder.and(project.status.eq(projectStatus));
     }
+    if (applicationDeadlineOffset != null) {
+        LocalDate applicationDeadline = LocalDate.now().plusDays(applicationDeadlineOffset);
+        booleanBuilder.and(project.applicationDeadline.loe(applicationDeadline));
+    }
+    JPAQuery<Project> query = queryFactory.selectFrom(project).where(booleanBuilder);
+    return query.fetch();
+}
 ```
 
 처음에는 위와 같이 `BooleanBuilder`를 이용해 각 변수가 가지고 있는 값에 따라 동적으로 쿼리문을 만들어 내었다. 그러나 다만, 각 변수가 가지고 있는 값을 확인을 해야 하기 때문에 `if` 문이 반복될 수 밖에 없었다. 이는 코드의 가독성을 해치고, 메소드가 한 가지 일을 하는 것이 아닌 여러 가지 일을 하게 된다.
