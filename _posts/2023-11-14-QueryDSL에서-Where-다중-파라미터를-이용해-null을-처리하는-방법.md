@@ -1,9 +1,9 @@
 ---
-title: "QueryDSL에서 Where 다중 파라미터를 이용해 null을 처리하는 방법"
+title: "QueryDSL에서 where 다중 파라미터를 이용해 null을 처리하는 방법"
 date: 2023-11-14 20:27:00 +09:00
-categories: [Jekyll]
+categories: [QueryDSL, Java, JPA, Spring]
 author: scv1702
-tags: [jekyll] # TAG names should always be lowercase
+tags: [querydsl, java, jpa, spring] # TAG names should always be lowercase
 ---
 
 GET-P 프로젝트를 진행하던 중, 프론트엔드에서 요청된 쿼리스트링에 따라 필터링을 하는 기능을 구현해야 됐었다. 해당 기능을 구현하는데 있어서 겪은 경험에 대해 정리해보았다.
@@ -28,7 +28,7 @@ public List<Project> findFilteredProjects(ProjectStatus projectStatus,
 
 처음에는 위와 같이 `BooleanBuilder`를 이용해 각 변수가 가지고 있는 값에 따라 동적으로 쿼리문을 만들어 내었다. 그러나 다만, 각 변수가 가지고 있는 값을 확인을 해야 하기 때문에 `if` 문이 반복될 수 밖에 없었다. 이는 코드의 가독성을 해치고, 메소드가 한 가지 일을 하는 것이 아닌 여러 가지 일을 하게 된다.
 
-위 문제는 QueryDSL의 `Where` 문의 다중 파라미터를 이용해 해결할 수 있다. `Where` 문에 `null`이 들어가게 되면 해당 변수에 대한 쿼리는 무시된다는 것을 이용해, `null` 값을 확인하는 로직을 메소드로 분리하고 마지막 `selectFrom`의 `Where` 문에 메소드들의 결과값을 파라미터로 넘기는 것이다.
+위 문제는 QueryDSL의 `where` 문의 다중 파라미터를 이용해 해결할 수 있다. `where` 문에 `null`이 들어가게 되면 해당 변수에 대한 쿼리는 무시된다는 것을 이용해, `null` 값을 확인하는 로직을 메소드로 분리하고 마지막 `selectFrom`의 `where` 문에 메소드들의 결과값을 파라미터로 넘기는 것이다.
 
 먼저 `projectStatus`가 `null` 인지 아닌지 판단하는 로직을 보자.
 ```java
@@ -69,7 +69,7 @@ private BooleanExpression applicationDeadlineLoe(Long applicationDeadlineOffset)
 }
 ```
 
-그리고 이들을 `queryFactory.selectFrom`의 `Where` 문의 파라미터로 넘긴다.
+그리고 이들을 `queryFactory.selectFrom`의 `where` 문의 파라미터로 넘긴다.
 
 ```java
 JPAQuery<Project> query = queryFactory.selectFrom(project).where(
