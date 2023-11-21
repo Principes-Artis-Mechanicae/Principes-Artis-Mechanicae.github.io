@@ -50,7 +50,7 @@ i와 ii의 경우 총개수를 구하는 쿼리를 실행할 필요가 없습니
 
 다음 터미널은 GET-P의 프로젝트를 조회하던 중 ii 경우의 예시입니다. 전체 데이터가 20개인데 `/projects?page=1&size=10` 를 요청한 상황입니다. `page`는 0부터 시작하기 때문에 `page=1` 일 때, 마지막 페이지라는 것을 알 수 있습니다. 하지만 PageImpl을 사용했기 때문에 다음과 같은 카운트 쿼리가 발생하였습니다.
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/b2aceccf-0a43-456e-a8dc-2840c4ba318d/13580612-ee81-446f-9451-782887161a8a/Untitled.png)
+![Untitled](https://github-production-user-asset-6210df.s3.amazonaws.com/30788586/284499474-63f5f5f7-4298-4495-8131-5b8de09bdd65.png)
 
 `PageImpl` 을 `PageableExecutionUtils`으로 변경한 코드입니다. 변경 이후 `findFilteredProjectPage` 에 content와 countQuery의 가독성을 높이기 위해 메서드로 분리하였습니다.
 
@@ -79,6 +79,6 @@ public Page<Project> findFilteredProjectPage(ProjectStatus projectStatus,
 
 다음 터미널은 `PageImpl` 을 `PageableExecutionUtils`으로 변경한 뒤, ii 경우의 예시입니다. 위와 같이 `/projects?page=1&size=10` 를 요청하였는데 카운트 쿼리 없이 마지막 content를 반환합니다.
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/b2aceccf-0a43-456e-a8dc-2840c4ba318d/903fb0fe-a27a-4526-a324-be7c29227b0a/Untitled.png)
+![Untitled](https://github-production-user-asset-6210df.s3.amazonaws.com/30788586/284499482-bf3af2f4-68a5-41d8-bdb8-04740bc7d691.PNG)
 
 결론적으로,**`PageableExecutionUtils`** 클래스를 사용하면 count 쿼리를 최적화할 수 있었습니다. 이를 통해, 애플리케이션의 성능을 향상시킬 수 있습니다.
