@@ -65,7 +65,7 @@ private List<Project> getProjectContent(ProjectStatus projectStatus,
 }
 
 private JPAQuery<Long> getProjectCountQuery(ProjectStatus projectStatus, Long applicationDeadlineOffset) {
-    return queryFactory.select(project.count()).from(project);
+    return queryFactory.select(project.count()).from(project).where(projectStatusEq(projectStatus),applicationDeadlineLoe(applicationDeadlineOffset));
 }
 
 public Page<Project> findFilteredProjectPage(ProjectStatus projectStatus,
