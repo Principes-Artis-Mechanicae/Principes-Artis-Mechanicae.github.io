@@ -28,14 +28,14 @@ Spring Boot를 사용하여 객체를 생성한다면 여러분들은 어떻게 
 public class Subway {
     
     /* 
-	불변 필드
+    불변 필드
     */
 
-	// 써브웨이 주문 번호
+    // 써브웨이 주문 번호
     private Long id;
 
-	/* 
-	가변 필드
+    /* 
+    가변 필드
     */
 
     // 메뉴 이름
@@ -55,9 +55,9 @@ public class Subway {
 
     // 세트 유무
     private String isSet;
-		
-	// 기본 생성자
-	public Subway(Long id, String menuName, String bread, String topping, String vegetable, String sauce, boolean isSet) {
+
+    // 기본 생성자
+    public Subway(Long id, String menuName, String bread, String topping, String vegetable, String sauce, boolean isSet) {
         this.id = id;
         this.menuName = menuName;
         this.bread = bread;
@@ -148,23 +148,23 @@ public Subway(Long id, String menuName, String bread, String topping, String veg
 
 ```java
 public class JavaBeansSubway {
-	/* 
-	불변 필드
+    /* 
+    불변 필드
     */
 
-	// 써브웨이 주문 번호
+    // 써브웨이 주문 번호
     private Long id;
 
     /* 
-	가변 필드
+    가변 필드
     */
 
     // 메뉴 이름
     private String menuName;
     
     // ... (생략) ...
-		
-		// 파라미터가 없는 빈 객체
+
+    // 파라미터가 없는 빈 객체
     public JavaBeansSubway() {}
 
     public void setId(Long id) {
@@ -183,19 +183,19 @@ public class JavaBeansSubway {
 
 ```java
 public class Application {
-		/*
-		자바 빈즈 패턴
-		*/
-		JavaBeansSubway javaBeansSubway = new JavaBeansSubway();
-        
-		// 원하는 매개변수의 값 설정
-		javaBeansSubway.setId(id);
-		javaBeansSubway.setMenuName(menu);
-		javaBeansSubway.setBread(bread);
-		javaBeansSubway.setTopping(topping);
-		javaBeansSubway.setVegetable(vegetable);
-		javaBeansSubway.setSauce(sauce);
-		javaBeansSubway.setIsSet(isSet);
+    /*
+    자바 빈즈 패턴
+    */
+    JavaBeansSubway javaBeansSubway = new JavaBeansSubway();
+
+    // 원하는 매개변수의 값 설정
+    javaBeansSubway.setId(id);
+    javaBeansSubway.setMenuName(menu);
+    javaBeansSubway.setBread(bread);
+    javaBeansSubway.setTopping(topping);
+    javaBeansSubway.setVegetable(vegetable);
+    javaBeansSubway.setSauce(sauce);
+    javaBeansSubway.setIsSet(isSet);
 }
 ```
 
@@ -326,17 +326,17 @@ public class SubwayBuilder {
 
 ```java
 public class Application {
-	/*
+    /*
     빌더 패턴
     */
-		Subway subway = new SubwayBuilder(id)
-		                            .menu(menu)
-		                            .bread(bread)
-		                            .topping(topping)
-		                            .vegetable(vegetable)
-		                            .sauce(sauce)
-		                            .set(isSet)
-		                        .build();
+    Subway subway = new SubwayBuilder(id)
+                            .menu(menu)
+                            .bread(bread)
+                            .topping(topping)
+                            .vegetable(vegetable)
+                            .sauce(sauce)
+                            .set(isSet)
+                        .build();
 }
 ```
 
