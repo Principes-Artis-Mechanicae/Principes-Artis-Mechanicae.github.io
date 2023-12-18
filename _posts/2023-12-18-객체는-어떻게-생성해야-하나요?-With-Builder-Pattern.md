@@ -28,14 +28,14 @@ Spring Boot를 사용하여 객체를 생성한다면 여러분들은 어떻게 
 public class Subway {
     
     /* 
-	    불변 필드
+	불변 필드
     */
 
-		// 써브웨이 주문 번호
+	// 써브웨이 주문 번호
     private Long id;
 
-		/* 
-	    가변 필드
+	/* 
+	가변 필드
     */
 
     // 메뉴 이름
@@ -56,7 +56,7 @@ public class Subway {
     // 세트 유무
     private String isSet;
 		
-	//기본 생성자
+	// 기본 생성자
 	public Subway(Long id, String menuName, String bread, String topping, String vegetable, String sauce, boolean isSet) {
         this.id = id;
         this.menuName = menuName;
@@ -148,15 +148,15 @@ public Subway(Long id, String menuName, String bread, String topping, String veg
 
 ```java
 public class JavaBeansSubway {
-		/* 
-	  불변 필드
+	/* 
+	불변 필드
     */
 
-		// 써브웨이 주문 번호
+	// 써브웨이 주문 번호
     private Long id;
 
     /* 
-	  가변 필드
+	가변 필드
     */
 
     // 메뉴 이름
@@ -326,7 +326,7 @@ public class SubwayBuilder {
 
 ```java
 public class Application {
-		/*
+	/*
     빌더 패턴
     */
 		Subway subway = new SubwayBuilder(id)
