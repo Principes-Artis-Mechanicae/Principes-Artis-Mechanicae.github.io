@@ -6,10 +6,6 @@ author: wlgns12370
 tags: [Java, 기본기, Builder] # TAG names should always be lowercase
 ---
 
-## 객체는 어떻게 생성해야 하나요? With Builder Pattern
-
----
-
 Spring Boot를 사용하여 객체를 생성한다면 여러분들은 어떻게 생성하실 건가요? 요즘 시대에 적용되고 있는 방법들을 소개해 보겠습니다. 먼저 객체를 생성하기 전 **필드의 불변과 가변의 유무를 판단해야 합니다.**
 
 > 💡 불변은 “변할 수 없는” 가변은 “변할 수 있는”으로 해석해 주시면 됩니다.
