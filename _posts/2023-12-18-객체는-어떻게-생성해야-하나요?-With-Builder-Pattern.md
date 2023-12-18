@@ -1,6 +1,6 @@
 ---
 title: "객체는 어떻게 생성해야 하나요? With Builder Pattern"
-date: 2023-12-18 10:51:00 +09:00
+date: 2023-12-18 13:55:00 +09:00
 categories: [Java, 기본기, Builder]
 author: wlgns12370
 tags: [Java, 기본기, Builder] # TAG names should always be lowercase
