@@ -1,9 +1,9 @@
 ---
 title: "수소 서버 ACPI Error 회고"
 date: 2024-01-08 00:00:00 +09:00
-categories: [회고]
+categories: [회고, infra, ACPI]
 author: wlgns12370
-tags: [회고] # TAG names should always be lowercase
+tags: [회고, infra, ACPI] # TAG names should always be lowercase
 ---
 
 GET-P 24년도 서비스 개편을 위해 기존의 코드를 레거시하고 새 Spring Project를 만들다 발생한 일입니다. 
