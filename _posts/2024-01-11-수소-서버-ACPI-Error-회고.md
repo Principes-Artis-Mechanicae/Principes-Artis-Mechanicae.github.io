@@ -1,6 +1,6 @@
 ---
 title: "수소 서버 ACPI Error 회고"
-date: 2024-01-08 23:38:00 +09:00
+date: 2024-01-11 12:30:00 +09:00
 categories: [회고, infra, ACPI]
 author: wlgns12370
 tags: [회고, infra, ACPI]
