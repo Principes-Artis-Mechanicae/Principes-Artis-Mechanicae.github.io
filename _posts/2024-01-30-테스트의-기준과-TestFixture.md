@@ -39,16 +39,18 @@ class test {
         .member(testMember)
         .build();
 
-    CreateClientRequest testCreateClientRequest 
-													= CreateClientRequest("겟피",
-																									"getp@princip.es",
-																									"010-1234-5678",
-																									"https://he.princip.es/img.jpg",
-																									"대구광역시",
-																									"3332-112-12-12"
-																								);
-		UpdateClientRequest testUpdateClientRequest 
-													= UpdateClientRequest("겟피.Update", ...); 
+    CreateClientRequest testCreateClientRequest = new CreateClientRequest(
+            "겟피",
+			"getp@princip.es",
+			"010-1234-5678",
+			"https://he.princip.es/img.jpg",
+			"대구광역시",
+			"3332-112-12-12"
+		);
+
+    UpdateClientRequest testUpdateClientRequest = new UpdateClientRequest(
+            "겟피.Update", ...
+        );
 
     void testCreate() {
         when(clientRepository.save(any(Client.class))).thenReturn(testClient);
@@ -73,7 +75,7 @@ class test {
     }
 }
 
-class anotherTest{
+class anotherTest {
     Client testClient = Client.builder()
         .name("겟피")
         .email("getp@princip.es")
@@ -83,7 +85,7 @@ class anotherTest{
         .accountNumber("3332-112-12-12")
         .member(testMember)
         .build();
-		
+
 		...
 }
 ```
@@ -156,7 +158,7 @@ class test {
     }
 
     void testUpdate() {
-				private final UpdateClientRequest testUpdateClientRequest = ClientFixture.updateClientRequest();
+		private final UpdateClientRequest testUpdateClientRequest = ClientFixture.updateClientRequest();
         when(clientRepository.save(any(Client.class))).thenReturn(any(Client.class));
         clientService.create(testMember, testCreateClientRequest);
         when(clientRepository.findByMember_MemberId(testMember.getMemberId())).thenReturn(Optional.of(testClient));
@@ -173,7 +175,8 @@ class anotherTest{
     private final Member testMember = MemberFixture.createMember();
     private final CreateClientRequest testCreateClientRequest = ClientFixture.createClientRequest();
     private final Client testClient = ClientFixture.createClientByMember(testMember);
-		...
+    
+    ...
 }
 ```
 
