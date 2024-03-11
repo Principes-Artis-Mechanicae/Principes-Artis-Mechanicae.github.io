@@ -41,12 +41,12 @@ class test {
 
     CreateClientRequest testCreateClientRequest = new CreateClientRequest(
             "겟피",
-			"getp@princip.es",
-			"010-1234-5678",
-			"https://he.princip.es/img.jpg",
-			"대구광역시",
-			"3332-112-12-12"
-		);
+            "getp@princip.es",
+            "010-1234-5678",
+            "https://he.princip.es/img.jpg",
+            "대구광역시",
+            "3332-112-12-12"
+        );
 
     UpdateClientRequest testUpdateClientRequest = new UpdateClientRequest(
             "겟피.Update", ...
@@ -113,7 +113,7 @@ public class ClientFixture {
     public static String PROFILE_IMAGE_URI = "https://he.princip.es/img.jpg";
     public static String ADDRESS = "대구광역시 북구";
     public static String ACCOUNT_NUMBER = "3332-112-12-12";
-		public static String UPDATED_NAME = "겟피.Update";
+    public static String UPDATED_NAME = "겟피.Update";
 
     public static CreateClientRequest createClientRequest() {
         return new CreateClientRequest(NAME, EMAIL, PHONE_NUMBER, NAME, EMAIL, ACCOUNT_NUMBER);
@@ -175,7 +175,7 @@ class anotherTest{
     private final Member testMember = MemberFixture.createMember();
     private final CreateClientRequest testCreateClientRequest = ClientFixture.createClientRequest();
     private final Client testClient = ClientFixture.createClientByMember(testMember);
-    
+
     ...
 }
 ```
