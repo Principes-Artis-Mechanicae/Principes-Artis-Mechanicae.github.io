@@ -1,9 +1,9 @@
 ---
-title: "테스트의 기준과 TestFixture"
+title: "테스트의 기준과 Test Fixture"
 date: 2024-01-11 12:30:00 +09:00
-categories: [Java, Test, TestFixture]
+categories: [Java, Test, Test-Fixture]
 author: wlgns12370
-tags: [Java, Test, TestFixture]
+tags: [Java, Test, Test-Fixture]
 ---
 
 GET-P 서버 테스트를 하기 위해서 메서드마다 테스트하는 **단위테스트**로 JUnit을 사용하고 있었습니다. 저에게 서버라 함은 “견고함”이 중요했습니다. 하지만 어느정도로 테스트를 해야할까?라는 의문은 지속 되었습니다. 주변에 쿠팡 백엔드 개발자인 분에게 질문을 해보았습니다. 예전 우아한형제들 포비님께 “테스트는 마음의 안정감이 드는데 까지”라는 말씀을 해주셨다고 합니다. 이후 서핑을 통해 논문에서도 70%~80%정도 커버하는게 일반적인 사실임을 알게 되었습니다.
@@ -28,7 +28,7 @@ Test Fixture는 테스트 데이터 셋이 중복될때, 하나의 변수(집합
 ### Test Fixture 사용 전 TestCode
 
 ```java
-class test {
+class Test {
     Client testClient = Client.builder()
         .name("겟피")
         .email("getp@princip.es")
@@ -75,7 +75,7 @@ class test {
     }
 }
 
-class anotherTest {
+class AnotherTest {
     Client testClient = Client.builder()
         .name("겟피")
         .email("getp@princip.es")
@@ -99,13 +99,13 @@ CRUD 많은 복잡한 메서드 중 간단하게 Create와 Update 메서드로 �
 Test Fixture를 적용하는 방식에는 크게 두가지가 있습니다.
 
 - **@BeforeEach**
-- **FixtureClass 생성**
+- **Fixture Class 생성**
 
-두 가지의 방법 중 위에서 언급한 클래스마다 중복되는 코드를 줄여 재사용성을 높이려면, `**FixtureClass**`를 권장합니다. 
+두 가지의 방법 중 위에서 언급한 클래스마다 중복되는 코드를 줄여 재사용성을 높이려면, Fixture Class를 권장합니다. 
 
 ### ClientFixture
 
-```jsx
+```java
 public class ClientFixture {
     public static String NAME = "겟피";
     public static String EMAIL = "getp@princip.es";
@@ -125,13 +125,13 @@ public class ClientFixture {
 
     public static Client createClientByMember(Member member) {
         return Client.builder()
-                        .name(NAME)
-                        .email(EMAIL)
-                        .phoneNumber(PHONE_NUMBER)
-                        .profileImageUri(PROFILE_IMAGE_URI)
-                        .address(ADDRESS)
-                        .accountNumber(ACCOUNT_NUMBER)
-                        .member(member)
+                    .name(NAME)
+                    .email(EMAIL)
+                    .phoneNumber(PHONE_NUMBER)
+                    .profileImageUri(PROFILE_IMAGE_URI)
+                    .address(ADDRESS)
+                    .accountNumber(ACCOUNT_NUMBER)
+                    .member(member)
                     .build();
     }
 }
@@ -142,11 +142,13 @@ public class ClientFixture {
 ### Test Fixture 사용 후 TestCode
 
 ```java
-class test {
+class Test {
     private final Member testMember = MemberFixture.createMember();
-    private final CreateClientRequest testCreateClientRequest = ClientFixture.createClientRequest();
     private final Client testClient = ClientFixture.createClientByMember(testMember);
 
+    private final CreateClientRequest testCreateClientRequest = ClientFixture.createClientRequest();
+    private final UpdateClientRequest testUpdateClientRequest = ClientFixture.updateClientRequest();
+    
     void testCreate() {
         when(clientRepository.save(any(Client.class))).thenReturn(testClient);
 
@@ -158,7 +160,6 @@ class test {
     }
 
     void testUpdate() {
-		private final UpdateClientRequest testUpdateClientRequest = ClientFixture.updateClientRequest();
         when(clientRepository.save(any(Client.class))).thenReturn(any(Client.class));
         clientService.create(testMember, testCreateClientRequest);
         when(clientRepository.findByMember_MemberId(testMember.getMemberId())).thenReturn(Optional.of(testClient));
@@ -171,7 +172,7 @@ class test {
     }
 }
 
-class anotherTest{
+class AnotherTest{
     private final Member testMember = MemberFixture.createMember();
     private final CreateClientRequest testCreateClientRequest = ClientFixture.createClientRequest();
     private final Client testClient = ClientFixture.createClientByMember(testMember);
@@ -180,10 +181,10 @@ class anotherTest{
 }
 ```
 
-`Test Fixture`에서 필요한 부분을 테스트가 필요한 `Class`에 넣어서 사용할 수 있습니다. 이전 코드보다 훨씬 깔끔해졌고, 재사용성을 높였습니다. 
+Test Fixture에서 필요한 부분을 테스트가 필요한 Class에 넣어서 사용할 수 있습니다. 이전 코드보다 훨씬 깔끔해졌고, 재사용성을 높였습니다. 
 
 ## 느낀점
 
 ---
 
-이번에 `Test Fixture`을 공부하면서 느낀 점은 **책임의 분리의 중요성입니다.** 항상 개발을 하다가 중복되는 코드를 리팩터링 하는 작업에서 고난을 겪고 새로운 패턴을 학습하게 되었는데, 정적 팩토리 메서드와 ****`Class`의 책임을 누구에게 위임하는가에 따라 **좋은 코드와 나쁜 코드**로 나누어진다고 느꼈습니다. 이후 개발을 하게 되면 30분이 걸리던 일이 10분 만에 완벽하게 해결되고 팀원과 **코드 리뷰를 하는 과정에서도 가독성이 높아져** Fixture에 소중함을 알게 된 경험이었습니다.
+이번에 Test Fixture을 공부하면서 느낀 점은 **책임의 분리의 중요성입니다.** 항상 개발을 하다가 중복되는 코드를 리팩터링 하는 작업에서 고난을 겪고 새로운 패턴을 학습하게 되었는데, 정적 팩토리 메서드와 **Class의 책임을 누구에게 위임하는가**에 따라 좋은 코드와 나쁜 코드로 나누어진다고 느꼈습니다. 이후 개발을 하게 되면 30분이 걸리던 일이 10분 만에 완벽하게 해결되고 팀원과 **코드 리뷰를 하는 과정에서도 가독성이 높아져** Fixture에 소중함을 알게 된 경험이었습니다.

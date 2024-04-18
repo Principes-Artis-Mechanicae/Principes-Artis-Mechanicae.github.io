@@ -330,12 +330,12 @@ public class Application {
     빌더 패턴
     */
     Subway subway = new SubwayBuilder(id)
-                            .menu(menu)
-                            .bread(bread)
-                            .topping(topping)
-                            .vegetable(vegetable)
-                            .sauce(sauce)
-                            .set(isSet)
+                        .menu(menu)
+                        .bread(bread)
+                        .topping(topping)
+                        .vegetable(vegetable)
+                        .sauce(sauce)
+                        .set(isSet)
                         .build();
 }
 ```
